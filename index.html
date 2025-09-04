@@ -6,40 +6,40 @@
   <title>Easy Star</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    :root{
-      --bg:#101720; --card:#17202b; --soft:#1e2a38; --muted:#a6b7c7; --text:#eaf3fb;
-      --acc1:#2ea6ff; --acc2:#00d0a8; --star:#ffd15c; --r:14px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial}
-    .wrap{padding-bottom:90px}
+    :root{ --bg:#101720; --card:#17202b; --soft:#1e2a38; --muted:#a6b7c7; --text:#eaf3fb;
+           --acc1:#2ea6ff; --acc2:#00d0a8; --star:#ffd15c; --r:14px; }
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial}
+    .wrap{padding-bottom:96px}
     .header{display:flex;align-items:center;gap:12px;padding:12px 14px}
     .ava{width:42px;height:42px;border-radius:50%;background:#253348;display:grid;place-items:center;font-weight:800}
-    .title{flex:1}
-    .title h1{margin:0;font-size:18px}
-    .title small{color:var(--muted)}
+    .title{flex:1} .title h1{margin:0;font-size:18px} .title small{color:var(--muted)}
     .pill{display:flex;gap:8px;align-items:center;background:var(--card);border-radius:999px;padding:8px 10px}
     .plus{width:36px;height:36px;display:grid;place-items:center;border-radius:999px;background:linear-gradient(135deg,var(--acc1),var(--acc2));font-weight:800}
-    .tabs{display:flex;gap:10px;padding:0 14px}
-    .tab{flex:1;background:var(--card);border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center}
-    .tab b{font-size:14px}
+    .tabs{display:flex;gap:10px;padding:0 14px;margin-top:4px}
+    .tab{flex:1;background:var(--card);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .tab.active{outline:2px solid #2ea6ff66}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 14px}
-    .case{background:var(--card);border-radius:var(--r);padding:14px;position:relative}
-    .case .nm{font-weight:800;margin:0 0 6px}
-    .case .pr{color:var(--muted);display:flex;justify-content:space-between}
-    .badge{position:absolute;top:8px;right:8px;font-size:12px;background:#273447;color:#9cd; padding:4px 7px;border-radius:10px}
-    .panel{position:fixed;left:0;right:0;bottom:0;background:var(--soft);border-top-left-radius:16px;border-top-right-radius:16px;padding:10px 12px}
+    .case{background:var(--card);border-radius:var(--r);padding:14px;position:relative;cursor:pointer}
+    .case .badge{position:absolute;top:8px;right:8px;font-size:12px;background:#273447;color:#9cd;padding:4px 7px;border-radius:10px}
+    .case .pic{font-size:48px;line-height:1;margin-bottom:8px}
+    .case .nm{font-weight:800;margin:0 0 4px}
+    .case .desc{color:var(--muted);font-size:13px;margin-bottom:8px}
+    .case .price{display:flex;align-items:center;gap:6px;color:#ffd15c;font-weight:800}
+    .case .open{margin-top:8px;width:100%;border:none;border-radius:12px;padding:10px;background:linear-gradient(135deg,var(--acc1),var(--acc2));color:#fff;font-weight:800}
+    .panel{position:fixed;left:0;right:0;bottom:56px;background:var(--soft);border-top-left-radius:16px;border-top-right-radius:16px;padding:10px 12px}
     .chips{display:flex;gap:8px;margin-bottom:10px}
-    .chip{flex:1;background:#233041;padding:10px 0;border-radius:12px;text-align:center}
+    .chip{flex:1;background:#233041;padding:10px 0;border-radius:12px;text-align:center;cursor:pointer}
     .chip.active{background:linear-gradient(135deg,var(--acc1),var(--acc2));font-weight:800}
     .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .switch{appearance:none;width:44px;height:26px;border-radius:999px;background:#2a374c;position:relative}
+    .switch{appearance:none;width:44px;height:26px;border-radius:999px;background:#2a374c;position:relative;cursor:pointer}
     .switch:checked{background:var(--acc2)}
     .switch:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
     .switch:checked:after{left:21px}
     .btn{width:100%;border:none;border-radius:14px;padding:16px;background:linear-gradient(135deg,var(--acc1),var(--acc2));color:#fff;font-weight:800;box-shadow:0 10px 24px #0006}
     .nav{position:fixed;left:0;right:0;bottom:0;height:56px;background:var(--card);display:flex;justify-content:space-around;align-items:center}
-    .nav span{font-size:12px;color:var(--muted)}
+    .nav .item{width:20%;text-align:center;cursor:pointer}
+    .nav .item span{display:block;font-size:12px;color:var(--muted)}
     .ov{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;z-index:10}
     .card{width:260px;min-height:220px;background:var(--card);border-radius:16px;padding:16px;text-align:center;box-shadow:0 20px 40px #0008}
     .big{font-size:64px;margin:0 0 8px}
@@ -58,8 +58,8 @@
   </div>
 
   <div class="tabs">
-    <div class="tab"><b>Classic</b><span id="pClassic">30⭐</span></div>
-    <div class="tab"><b>Lucky</b><span id="pLucky">45⭐</span></div>
+    <div class="tab active" id="tabClassic"><b>Classic</b><span>30⭐</span></div>
+    <div class="tab" id="tabLucky"><b>Lucky</b><span>45⭐</span></div>
   </div>
 
   <div class="grid" id="grid"></div>
@@ -80,11 +80,11 @@
   </div>
 
   <div class="nav">
-    <div>🎁<br/><span>Home</span></div>
-    <div>🛠️<br/><span>Upgrade</span></div>
-    <div>🏆<br/><span>Leaders</span></div>
-    <div>👤<br/><span>Profile</span></div>
-    <div>🕓<br/><span>History</span></div>
+    <div class="item" id="navHome">🎁<span>Home</span></div>
+    <div class="item" id="navUpg">🛠️<span>Upgrade</span></div>
+    <div class="item" id="navLead">🏆<span>Leaders</span></div>
+    <div class="item" id="navProf">👤<span>Profile</span></div>
+    <div class="item" id="navHist">🕓<span>History</span></div>
   </div>
 </div>
 
@@ -104,7 +104,7 @@ document.getElementById('ava').textContent = (u.first_name||'U').slice(0,1).toUp
 document.getElementById('uname').textContent = u.username?('@'+u.username):'Mini App';
 document.getElementById('bal').textContent = '—';
 
-// предметы (для отображения)
+// предметы для отображения
 const ITEMS = [
   {k:'diamond_100',e:'💎',t:'Бриллиант',p:100},
   {k:'ring_100',   e:'💍',t:'Кольцо',   p:100},
@@ -119,49 +119,79 @@ const ITEMS = [
   {k:'heart_15',   e:'❤️',t:'Сердце',   p:15},
   {k:'nft_rare',   e:'🧿',t:'NFT (редкий)',p:0},
 ];
-
 const PROBS_CLASSIC = {
   heart_15:0.30,bear_15:0.20,present_25:0.15,rose_25:0.08,cake_50:0.07,bouquet_50:0.06,rocket_50:0.05,champagne_50:0.04,trophy_100:0.02,ring_100:0.015,diamond_100:0.01,nft_rare:0.005
 };
 const PROBS_LUCKY = {
   heart_15:0.24,bear_15:0.18,present_25:0.14,rose_25:0.09,cake_50:0.07,bouquet_50:0.07,rocket_50:0.07,champagne_50:0.06,trophy_100:0.03,ring_100:0.02,diamond_100:0.014,nft_rare:0.01
 };
-
 const CASES = {
-  classic:{name:'Classic Case',price:30,probs:PROBS_CLASSIC},
-  lucky:{name:'Lucky Case',price:45,probs:PROBS_LUCKY}
+  classic:{name:'Classic Case',desc:'Сбалансированный',price:30,probs:PROBS_CLASSIC,emoji:'🎁'},
+  lucky:{name:'Lucky Case',desc:'Больше дорогих',price:45,probs:PROBS_LUCKY,emoji:'💠'},
 };
+
 let currentCase='classic';
 document.getElementById('price').textContent = CASES[currentCase].price;
-document.getElementById('pClassic').textContent = CASES.classic.price+'⭐';
-document.getElementById('pLucky').textContent = CASES.lucky.price+'⭐';
 
-// карточки кейсов
-const grid=document.getElementById('grid');
-grid.innerHTML = `
-  <div class="case" data-case="classic">
-    <div class="badge">Default</div>
-    <div class="nm">Classic Case</div>
-    <div class="pr"><span>Сбалансированный</span><b>⭐ ${CASES.classic.price}</b></div>
-  </div>
-  <div class="case" data-case="lucky">
-    <div class="badge">New</div>
-    <div class="nm">Lucky Case</div>
-    <div class="pr"><span>Больше дорогих</span><b>⭐ ${CASES.lucky.price}</b></div>
-  </div>
-`;
-[...grid.querySelectorAll('.case')].forEach(el=>{
-  el.onclick=()=>{
-    currentCase=el.dataset.case;
-    document.getElementById('price').textContent=CASES[currentCase].price;
-    tg.HapticFeedback?.impactOccurred?.('light');
-  };
-});
+// навигация
+document.getElementById('navProf').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
+document.getElementById('navHome').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+document.getElementById('navUpg').onclick=()=>tg.sendData(JSON.stringify({a:'balance_menu'}));
+document.getElementById('navLead').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
+document.getElementById('navHist').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
 
 // пополнение
-document.getElementById('add').onclick=()=>{
-  tg.sendData(JSON.stringify({a:'balance_menu'}));
-};
+document.getElementById('add').onclick=()=>tg.sendData(JSON.stringify({a:'balance_menu'}));
+
+// табы
+const tC=document.getElementById('tabClassic'); const tL=document.getElementById('tabLucky');
+tC.onclick=()=>selectCase('classic');
+tL.onclick=()=>selectCase('lucky');
+function selectCase(k){
+  currentCase=k;
+  tC.classList.toggle('active',k==='classic');
+  tL.classList.toggle('active',k==='lucky');
+  document.getElementById('price').textContent = CASES[currentCase].price;
+  drawCases();
+}
+
+// карточки кейсов (каждая кликается + есть кнопка “Открыть”)
+const grid = document.getElementById('grid');
+function caseCard(key){
+  const c=CASES[key];
+  const badge = key==='classic'?'Default':'New';
+  return `
+    <div class="case" data-case="${key}">
+      <div class="badge">${badge}</div>
+      <div class="pic">${c.emoji}</div>
+      <div class="nm">${c.name}</div>
+      <div class="desc">${c.desc}</div>
+      <div class="price"><span>⭐</span><b>${c.price}</b></div>
+      <button class="open" data-open="${key}">Открыть за ${c.price} ⭐</button>
+    </div>`;
+}
+function drawCases(){
+  grid.innerHTML = caseCard('classic') + caseCard('lucky');
+  // клики по карточке — выбирают кейс
+  grid.querySelectorAll('.case').forEach(el=>{
+    el.onclick = (e)=>{
+      // если нажали на кнопку — не перезаписываем
+      if(e.target && e.target.dataset && e.target.dataset.open) return;
+      selectCase(el.dataset.case);
+      tg.HapticFeedback?.impactOccurred?.('light');
+    };
+  });
+  // клики по кнопке “Открыть”
+  grid.querySelectorAll('button[data-open]').forEach(btn=>{
+    btn.onclick = (e)=>{
+      e.stopPropagation();
+      const k = btn.dataset.open;
+      selectCase(k);
+      doSpin(); // 1 кликом открываем
+    };
+  });
+}
+drawCases();
 
 // выбор спинов
 let spins=1;
@@ -201,16 +231,17 @@ function showResult(keys){
   setTimeout(()=>{ov.style.display='none';}, 1500);
 }
 
-// кнопка спина
+// кнопка “Try Your Luck”
 const fast=document.getElementById('fast');
-document.getElementById('spin').onclick=()=>{
+document.getElementById('spin').onclick=()=>doSpin();
+function doSpin(){
   const cfg=CASES[currentCase];
   const local=[];
   for(let i=0;i<spins;i++) local.push(weightedPick(cfg.probs));
   showResult(local);
   tg.HapticFeedback?.impactOccurred?.(fast.checked?'light':'heavy');
   tg.sendData(JSON.stringify({a:'spin', case: currentCase, n: spins}));
-};
+}
 </script>
 </body>
 </html>
