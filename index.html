@@ -1,59 +1,58 @@
-<!doctype html>
+ <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Easy Star</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    :root{ --bg:#101720; --card:#17202b; --soft:#1e2a38; --muted:#a6b7c7; --text:#eaf3fb;
-           --acc1:#2ea6ff; --acc2:#00d0a8; --star:#ffd15c; --r:14px; }
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial}
-    .wrap{padding-bottom:96px}
-    .header{display:flex;align-items:center;gap:12px;padding:12px 14px}
-    .ava{width:42px;height:42px;border-radius:50%;background:#253348;display:grid;place-items:center;font-weight:800}
-    .title{flex:1} .title h1{margin:0;font-size:18px} .title small{color:var(--muted)}
-    .pill{display:flex;gap:8px;align-items:center;background:var(--card);border-radius:999px;padding:8px 10px}
-    .plus{width:36px;height:36px;display:grid;place-items:center;border-radius:999px;background:linear-gradient(135deg,var(--acc1),var(--acc2));font-weight:800}
-    .tabs{display:flex;gap:10px;padding:0 14px;margin-top:4px}
-    .tab{flex:1;background:var(--card);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-    .tab.active{outline:2px solid #2ea6ff66}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 14px}
-    .case{background:var(--card);border-radius:var(--r);padding:14px;position:relative;cursor:pointer}
-    .case .badge{position:absolute;top:8px;right:8px;font-size:12px;background:#273447;color:#9cd;padding:4px 7px;border-radius:10px}
-    .case .pic{font-size:48px;line-height:1;margin-bottom:8px}
-    .case .nm{font-weight:800;margin:0 0 4px}
-    .case .desc{color:var(--muted);font-size:13px;margin-bottom:8px}
-    .case .price{display:flex;align-items:center;gap:6px;color:#ffd15c;font-weight:800}
-    .case .open{margin-top:8px;width:100%;border:none;border-radius:12px;padding:10px;background:linear-gradient(135deg,var(--acc1),var(--acc2));color:#fff;font-weight:800}
-    .panel{position:fixed;left:0;right:0;bottom:56px;background:var(--soft);border-top-left-radius:16px;border-top-right-radius:16px;padding:10px 12px}
-    .chips{display:flex;gap:8px;margin-bottom:10px}
-    .chip{flex:1;background:#233041;padding:10px 0;border-radius:12px;text-align:center;cursor:pointer}
-    .chip.active{background:linear-gradient(135deg,var(--acc1),var(--acc2));font-weight:800}
-    .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .switch{appearance:none;width:44px;height:26px;border-radius:999px;background:#2a374c;position:relative;cursor:pointer}
-    .switch:checked{background:var(--acc2)}
-    .switch:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
-    .switch:checked:after{left:21px}
-    .btn{width:100%;border:none;border-radius:14px;padding:16px;background:linear-gradient(135deg,var(--acc1),var(--acc2));color:#fff;font-weight:800;box-shadow:0 10px 24px #0006}
-    .nav{position:fixed;left:0;right:0;bottom:0;height:56px;background:var(--card);display:flex;justify-content:space-around;align-items:center}
-    .nav .item{width:20%;text-align:center;cursor:pointer}
-    .nav .item span{display:block;font-size:12px;color:var(--muted)}
-    .ov{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;z-index:10}
-    .card{width:260px;min-height:220px;background:var(--card);border-radius:16px;padding:16px;text-align:center;box-shadow:0 20px 40px #0008}
-    .big{font-size:64px;margin:0 0 8px}
-    .items{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
-    .cell{background:var(--soft);border-radius:10px;padding:8px 4px}
-    .mut{color:var(--muted);font-size:12px;margin-top:6px}
-  </style>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Easy Star</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#101720;--card:#17202b;--soft:#1e2a38;--muted:#a6b7c7;--text:#eaf3fb;--acc1:#2ea6ff;--acc2:#00d0a8;--star:#ffd15c;--r:14px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial}
+.wrap{padding-bottom:96px}
+.header{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.ava{width:42px;height:42px;border-radius:50%;background:#253348;display:grid;place-items:center;font-weight:800}
+.title{flex:1}.title h1{margin:0;font-size:18px}.title small{color:var(--muted)}
+.pill{display:flex;gap:8px;align-items:center;background:var(--card);border-radius:999px;padding:8px 10px}
+.plus{width:36px;height:36px;display:grid;place-items:center;border-radius:999px;background:linear-gradient(135deg,var(--acc1),var(--acc2));font-weight:800;cursor:pointer}
+.tabs{display:flex;gap:10px;padding:0 14px}
+.tab{flex:1;background:var(--card);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.tab.active{outline:2px solid #2ea6ff66}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 14px}
+.case{background:var(--card);border-radius:var(--r);padding:14px;position:relative;cursor:pointer}
+.badge{position:absolute;top:8px;right:8px;font-size:12px;background:#273447;color:#9cd;padding:4px 6px;border-radius:10px}
+.pic{font-size:48px;margin-bottom:8px}
+.nm{font-weight:800;margin:0 0 4px}.desc{color:var(--muted);font-size:13px;margin-bottom:8px}
+.price{display:flex;align-items:center;gap:6px;color:var(--star);font-weight:800}
+.open{margin-top:8px;width:100%;border:none;border-radius:12px;padding:10px;background:linear-gradient(135deg,var(--acc1),var(--acc2));color:#fff;font-weight:800;cursor:pointer}
+.panel{position:fixed;left:0;right:0;bottom:56px;background:var(--soft);border-top-left-radius:16px;border-top-right-radius:16px;padding:10px 12px}
+.chips{display:flex;gap:8px;margin-bottom:10px}
+.chip{flex:1;background:#233041;padding:10px 0;border-radius:12px;text-align:center;cursor:pointer}
+.chip.active{background:linear-gradient(135deg,var(--acc1),var(--acc2));font-weight:800}
+.row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.switch{appearance:none;width:44px;height:26px;border-radius:999px;background:#2a374c;position:relative;cursor:pointer}
+.switch:checked{background:var(--acc2)}.switch:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.switch:checked:after{left:21px}
+.btn{width:100%;border:none;border-radius:14px;padding:16px;background:linear-gradient(135deg,var(--acc1),var(--acc2));color:#fff;font-weight:800;box-shadow:0 10px 24px #0006;cursor:pointer}
+.nav{position:fixed;left:0;right:0;bottom:0;height:56px;background:var(--card);display:flex;justify-content:space-around;align-items:center}
+.nav .item{width:20%;text-align:center;cursor:pointer}.nav .item span{display:block;font-size:12px;color:var(--muted)}
+.ov{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;z-index:10}
+.card{width:280px;min-height:220px;background:var(--card);border-radius:16px;padding:16px;text-align:center;box-shadow:0 20px 40px #0008}
+.big{font-size:64px;margin:0 0 8px}
+.items{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.cell{background:var(--soft);border-radius:10px;padding:8px 4px}
+.mut{color:var(--muted);font-size:12px;margin-top:6px}
+.modal{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;z-index:11}
+.box{width:300px;max-width:92vw;background:var(--card);border-radius:16px;padding:14px}
+.box h3{margin:0 0 8px}
+.list .rowi{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #223142}
+.close{margin-top:10px;width:100%;border:none;border-radius:12px;padding:10px;background:#233041;color:#fff}
+</style>
 </head>
 <body>
 <div class="wrap">
   <div class="header">
     <div class="ava" id="ava">U</div>
     <div class="title"><h1>Easy Star</h1><small id="uname">@user</small></div>
-    <div class="pill"><span>⭐</span><b id="bal">—</b></div>
+    <div class="pill"><span>⭐</span><b id="bal">≈ 0</b></div>
     <div class="plus" id="add">+</div>
   </div>
 
@@ -66,16 +65,11 @@
 
   <div class="panel">
     <div class="chips" id="chips">
-      <div class="chip active" data-n="1">1</div>
-      <div class="chip" data-n="2">2</div>
-      <div class="chip" data-n="3">3</div>
-      <div class="chip" data-n="4">4</div>
+      <div class="chip active" data-n="1">1</div><div class="chip" data-n="2">2</div>
+      <div class="chip" data-n="3">3</div><div class="chip" data-n="4">4</div>
       <div class="chip" data-n="5">5</div>
     </div>
-    <div class="row">
-      <div class="mut">Fast</div>
-      <input type="checkbox" id="fast" class="switch"/>
-    </div>
+    <div class="row"><div class="mut">Fast</div><input type="checkbox" id="fast" class="switch"/></div>
     <button class="btn" id="spin">Try Your Luck — <span id="price">30</span> ⭐</button>
   </div>
 
@@ -88,133 +82,107 @@
   </div>
 </div>
 
-<div class="ov" id="ov">
-  <div class="card" id="res">
-    <div class="big" id="big">🎁</div>
-    <b id="ttl">Подарок</b>
-    <div class="items" id="multi"></div>
-    <div class="mut">Итог прислан в чат ботом</div>
-  </div>
-</div>
+<!-- результат -->
+<div class="ov" id="ov"><div class="card"><div class="big" id="big">🎁</div><b id="ttl">Подарок</b><div class="items" id="multi"></div><div class="mut">Итог в чате</div></div></div>
+
+<!-- содержимое кейса -->
+<div class="modal" id="mdl"><div class="box">
+  <h3 id="mh">Classic Case</h3>
+  <div class="list" id="list"></div>
+  <button class="close" id="mclose">Закрыть</button>
+</div></div>
 
 <script>
-const tg = window.Telegram.WebApp; tg.expand(); tg.ready();
-const u = tg.initDataUnsafe?.user || {};
-document.getElementById('ava').textContent = (u.first_name||'U').slice(0,1).toUpperCase();
-document.getElementById('uname').textContent = u.username?('@'+u.username):'Mini App';
-document.getElementById('bal').textContent = '—';
+const tg=window.Telegram.WebApp; tg.expand(); tg.ready();
+const u=tg.initDataUnsafe?.user||{}; document.getElementById('ava').textContent=(u.first_name||'U').slice(0,1).toUpperCase();
+document.getElementById('uname').textContent=u.username?('@'+u.username):'Mini App';
 
-// предметы для отображения
-const ITEMS = [
-  {k:'diamond_100',e:'💎',t:'Бриллиант',p:100},
-  {k:'ring_100',   e:'💍',t:'Кольцо',   p:100},
-  {k:'trophy_100', e:'🏆',t:'Кубок',    p:100},
-  {k:'rocket_50',  e:'🚀',t:'Ракета',   p:50},
-  {k:'bouquet_50', e:'💐',t:'Букет',    p:50},
-  {k:'cake_50',    e:'🎂',t:'Торт',     p:50},
-  {k:'champagne_50',e:'🍾',t:'Шампанское',p:50},
-  {k:'present_25', e:'🎁',t:'Подарок',  p:25},
-  {k:'rose_25',    e:'🌹',t:'Роза',     p:25},
-  {k:'bear_15',    e:'🧸',t:'Мишка',    p:15},
-  {k:'heart_15',   e:'❤️',t:'Сердце',   p:15},
-  {k:'nft_rare',   e:'🧿',t:'NFT (редкий)',p:0},
-];
-const PROBS_CLASSIC = {
-  heart_15:0.30,bear_15:0.20,present_25:0.15,rose_25:0.08,cake_50:0.07,bouquet_50:0.06,rocket_50:0.05,champagne_50:0.04,trophy_100:0.02,ring_100:0.015,diamond_100:0.01,nft_rare:0.005
+// локальный “≈ баланс”
+let localBal=0; const balEl=document.getElementById('bal'); function setBal(x){ balEl.textContent='≈ '+x; }
+
+// кейсы
+const CASES={
+  classic:{name:'Classic Case',desc:'Сбалансированный',price:30,emoji:'🎁'},
+  lucky:{name:'Lucky Case',desc:'Больше дорогих',price:45,emoji:'💠'}
 };
-const PROBS_LUCKY = {
-  heart_15:0.24,bear_15:0.18,present_25:0.14,rose_25:0.09,cake_50:0.07,bouquet_50:0.07,rocket_50:0.07,champagne_50:0.06,trophy_100:0.03,ring_100:0.02,diamond_100:0.014,nft_rare:0.01
-};
-const CASES = {
-  classic:{name:'Classic Case',desc:'Сбалансированный',price:30,probs:PROBS_CLASSIC,emoji:'🎁'},
-  lucky:{name:'Lucky Case',desc:'Больше дорогих',price:45,probs:PROBS_LUCKY,emoji:'💠'},
-};
+let current='classic'; let spins=1;
 
-let currentCase='classic';
-document.getElementById('price').textContent = CASES[currentCase].price;
+// предметы
+const ITEMS=[{k:'diamond_100',e:'💎',t:'Бриллиант',p:100},{k:'ring_100',e:'💍',t:'Кольцо',p:100},{k:'trophy_100',e:'🏆',t:'Кубок',p:100},{k:'rocket_50',e:'🚀',t:'Ракета',p:50},{k:'bouquet_50',e:'💐',t:'Букет',p:50},{k:'cake_50',e:'🎂',t:'Торт',p:50},{k:'champagne_50',e:'🍾',t:'Шампанское',p:50},{k:'present_25',e:'🎁',t:'Подарок',p:25},{k:'rose_25',e:'🌹',t:'Роза',p:25},{k:'bear_15',e:'🧸',t:'Мишка',p:15},{k:'heart_15',e:'❤️',t:'Сердце',p:15},{k:'nft_rare',e:'🧿',t:'NFT (редкий)',p:0}];
 
-// навигация
-document.getElementById('navProf').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
-document.getElementById('navHome').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
-document.getElementById('navUpg').onclick=()=>tg.sendData(JSON.stringify({a:'balance_menu'}));
-document.getElementById('navLead').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
-document.getElementById('navHist').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
+// шансы для визуала (как раньше, “красивые”)
+const PROBS_C={"heart_15":0.30,"bear_15":0.20,"present_25":0.15,"rose_25":0.08,"cake_50":0.07,"bouquet_50":0.06,"rocket_50":0.05,"champagne_50":0.04,"trophy_100":0.02,"ring_100":0.015,"diamond_100":0.01,"nft_rare":0.005};
+const PROBS_L={"heart_15":0.24,"bear_15":0.18,"present_25":0.14,"rose_25":0.09,"cake_50":0.07,"bouquet_50":0.07,"rocket_50":0.07,"champagne_50":0.06,"trophy_100":0.03,"ring_100":0.02,"diamond_100":0.014,"nft_rare":0.01};
 
-// пополнение
-document.getElementById('add').onclick=()=>tg.sendData(JSON.stringify({a:'balance_menu'}));
-
-// табы
-const tC=document.getElementById('tabClassic'); const tL=document.getElementById('tabLucky');
-tC.onclick=()=>selectCase('classic');
-tL.onclick=()=>selectCase('lucky');
-function selectCase(k){
-  currentCase=k;
-  tC.classList.toggle('active',k==='classic');
-  tL.classList.toggle('active',k==='lucky');
-  document.getElementById('price').textContent = CASES[currentCase].price;
-  drawCases();
-}
-
-// карточки кейсов (каждая кликается + есть кнопка “Открыть”)
-const grid = document.getElementById('grid');
-function caseCard(key){
-  const c=CASES[key];
-  const badge = key==='classic'?'Default':'New';
-  return `
-    <div class="case" data-case="${key}">
+function drawCases(){
+  const g=document.getElementById('grid');
+  g.innerHTML = ['classic','lucky'].map(k=>{
+    const c=CASES[k], badge=(k==='classic'?'Default':'New');
+    const contentBtn=`<button class="open" data-show="${k}">Содержимое</button>`;
+    const openBtn=`<button class="open" data-open="${k}">Открыть за ${c.price} ⭐</button>`;
+    return `<div class="case" data-case="${k}">
       <div class="badge">${badge}</div>
       <div class="pic">${c.emoji}</div>
       <div class="nm">${c.name}</div>
       <div class="desc">${c.desc}</div>
       <div class="price"><span>⭐</span><b>${c.price}</b></div>
-      <button class="open" data-open="${key}">Открыть за ${c.price} ⭐</button>
+      ${contentBtn}${openBtn}
     </div>`;
-}
-function drawCases(){
-  grid.innerHTML = caseCard('classic') + caseCard('lucky');
-  // клики по карточке — выбирают кейс
-  grid.querySelectorAll('.case').forEach(el=>{
-    el.onclick = (e)=>{
-      // если нажали на кнопку — не перезаписываем
-      if(e.target && e.target.dataset && e.target.dataset.open) return;
+  }).join('');
+  // клики по карточке — выбор кейса
+  g.querySelectorAll('.case').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      // если попали в кнопку — обработается ниже
+      if(e.target && (e.target.dataset.open || e.target.dataset.show)) return;
       selectCase(el.dataset.case);
-      tg.HapticFeedback?.impactOccurred?.('light');
-    };
+    })
   });
-  // клики по кнопке “Открыть”
-  grid.querySelectorAll('button[data-open]').forEach(btn=>{
-    btn.onclick = (e)=>{
-      e.stopPropagation();
-      const k = btn.dataset.open;
-      selectCase(k);
-      doSpin(); // 1 кликом открываем
-    };
+  // кнопка “Открыть”
+  g.querySelectorAll('button[data-open]').forEach(btn=>{
+    btn.onclick=(e)=>{ e.stopPropagation(); selectCase(btn.dataset.open); doSpin(); };
+  });
+  // кнопка “Содержимое”
+  g.querySelectorAll('button[data-show]').forEach(btn=>{
+    btn.onclick=(e)=>{ e.stopPropagation(); showContents(btn.dataset.show); };
   });
 }
 drawCases();
 
-// выбор спинов
-let spins=1;
-document.getElementById('chips').querySelectorAll('.chip').forEach(ch=>{
+function selectCase(k){
+  current=k;
+  document.getElementById('tabClassic').classList.toggle('active', k==='classic');
+  document.getElementById('tabLucky').classList.toggle('active', k==='lucky');
+  priceEl.textContent = CASES[current].price*spins;
+  tg.HapticFeedback?.impactOccurred?.('light');
+}
+document.getElementById('tabClassic').onclick=()=>selectCase('classic');
+document.getElementById('tabLucky').onclick=()=>selectCase('lucky');
+
+// содержимое кейса (модал)
+const mdl=document.getElementById('mdl'), list=document.getElementById('list'), mh=document.getElementById('mh');
+document.getElementById('mclose').onclick=()=>mdl.style.display='none';
+function showContents(k){
+  mh.textContent = CASES[k].name;
+  list.innerHTML = ITEMS.map(it=>`<div class="rowi"><div>${it.e} ${it.t}</div><b>${it.p?('⭐ '+it.p):'rare'}</b></div>`).join('');
+  mdl.style.display='flex';
+}
+
+// баланс: открывает пополнение в чате (и “синх”)
+document.getElementById('add').onclick=()=>{ tg.sendData(JSON.stringify({a:'balance_menu'})); };
+
+// спины 1–5
+document.querySelectorAll('#chips .chip').forEach(ch=>{
   ch.onclick=()=>{
-    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('#chips .chip').forEach(x=>x.classList.remove('active'));
     ch.classList.add('active'); spins=parseInt(ch.dataset.n||'1',10);
+    priceEl.textContent = CASES[current].price*spins;
   };
 });
+const priceEl=document.getElementById('price'); priceEl.textContent = CASES[current].price*spins;
 
 // оверлей результата
-const ov=document.getElementById('ov');
-const big=document.getElementById('big');
-const ttl=document.getElementById('ttl');
-const multi=document.getElementById('multi');
-
-function weightedPick(probs){
-  const keys=Object.keys(probs);
-  let r=Math.random(),acc=0;
-  for(const k of keys){ acc+=probs[k]; if(r<acc) return k; }
-  return keys[keys.length-1];
-}
-function showResult(keys){
+const ov=document.getElementById('ov'), big=document.getElementById('big'), ttl=document.getElementById('ttl'), multi=document.getElementById('multi');
+function showRes(keys){
   ov.style.display='flex';
   if(keys.length===1){
     const it=ITEMS.find(x=>x.k===keys[0])||{e:'🎁',t:'Подарок'};
@@ -223,25 +191,37 @@ function showResult(keys){
     big.textContent='🎉'; ttl.textContent='Результаты'; multi.innerHTML='';
     keys.forEach(k=>{
       const it=ITEMS.find(x=>x.k===k)||{e:'🎁',t:'Подарок'};
-      const cell=document.createElement('div'); cell.className='cell';
-      cell.innerHTML=`<div style="font-size:28px">${it.e}</div><div style="font-size:12px">${it.t}</div>`;
-      multi.appendChild(cell);
+      const d=document.createElement('div'); d.className='cell';
+      d.innerHTML=`<div style="font-size:28px">${it.e}</div><div style="font-size:12px">${it.t}</div>`;
+      multi.appendChild(d);
     });
   }
-  setTimeout(()=>{ov.style.display='none';}, 1500);
+  setTimeout(()=>{ov.style.display='none';}, 1400);
 }
 
-// кнопка “Try Your Luck”
-const fast=document.getElementById('fast');
-document.getElementById('spin').onclick=()=>doSpin();
+// простая локальная рулетка (визуал)
+function wPick(probs){ const keys=Object.keys(probs); let r=Math.random(),acc=0; for(const k of keys){acc+=probs[k]; if(r<acc) return k} return keys[keys.length-1] }
 function doSpin(){
-  const cfg=CASES[currentCase];
-  const local=[];
-  for(let i=0;i<spins;i++) local.push(weightedPick(cfg.probs));
-  showResult(local);
-  tg.HapticFeedback?.impactOccurred?.(fast.checked?'light':'heavy');
-  tg.sendData(JSON.stringify({a:'spin', case: currentCase, n: spins}));
+  const cfg=current==='classic'?{probs:PROBS_C}: {probs:PROBS_L};
+  const keys=[]; for(let i=0;i<spins;i++) keys.push(wPick(cfg.probs));
+  showRes(keys);
+  // визуально уменьшим локальный баланс
+  localBal = Math.max(0, localBal - CASES[current].price*spins);
+  setBal(localBal);
+  tg.HapticFeedback?.impactOccurred?.(document.getElementById('fast').checked?'light':'heavy');
+  tg.sendData(JSON.stringify({a:'spin', case: current, n: spins, fast: document.getElementById('fast').checked}));
 }
+document.getElementById('spin').onclick=doSpin;
+
+// навигация
+document.getElementById('navProf').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
+document.getElementById('navHome').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+document.getElementById('navUpg').onclick=()=>tg.sendData(JSON.stringify({a:'balance_menu'}));
+document.getElementById('navLead').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
+document.getElementById('navHist').onclick=()=>tg.sendData(JSON.stringify({a:'inventory'}));
+
+// начальные значения
+setBal(localBal);
 </script>
 </body>
 </html>
